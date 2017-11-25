@@ -8,11 +8,15 @@
 	},
 	"dependencies": {
 		"react": "16.0.0",
-		"react-native": "0.50.3"
+		"react-native": "0.50.3",
+		"react-native-elements": "^0.18.2",
+		"react-native-vector-icons": "^4.4.2"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",
 		"babel-preset-react-native": "4.0.0",
+		"eslint": "^4.10.0",
+		"eslint-plugin-react": "^7.4.0",
 		"jest": "21.2.1",
 		"react-test-renderer": "16.0.0"
 	},
