@@ -5,6 +5,8 @@
  * Everything between 'BEGIN' and 'END' was copied from the url above.
  */
 
+// var fetch = require('node-fetch');
+
 /* eslint-disable */
 // BEGIN
 

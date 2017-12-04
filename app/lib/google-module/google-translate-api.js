@@ -1,3 +1,4 @@
+// var fetch = require('node-fetch');
 var token = require('./google-translate-token');
 var languages = require('./google-translate-languages');
 

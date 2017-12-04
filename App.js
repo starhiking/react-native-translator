@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
 import { Alert, Text } from 'react-native';
-import google from './app/lib/google-translate-api';
+import baidu from './app/lib/baidu';
+import google from './app/lib/google';
+import youdao from './app/lib/youdao';
 import { dir } from './app/lib/yukimilib';
 
 export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            text: dir(google.languages)
+            text: 'Hello World!'
         };
     }
 
     componentDidMount() {
-        google('Chinese', { to: 'zh-cn', raw: true }).then(res => {
-            const json_string = JSON.stringify(JSON.parse(res.raw), null, 4).toString();
-            alert(json_string);
-        }).catch(err => {
-            alert(err);
+        baidu('show', 'en', 'zh').then(result => {
+            alert(JSON.stringify(result, null, 4).toString());
+
+            google('show', 'en', 'zh').then(result => {
+                alert(JSON.stringify(result, null, 4).toString());
+
+                youdao('show', 'en', 'zh').then(result => {
+                    alert(JSON.stringify(result, null, 4).toString());
+
+                });
+            });
         });
     }
 

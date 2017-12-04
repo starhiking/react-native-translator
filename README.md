@@ -12,6 +12,34 @@ Explain each of the features from a user perspective and write a short set of us
 ## Development Notes:
 Discuss the most complex part of your project and highlight any difficulties you encountered and how you resolved them. Explain exactly what development you have completed.
 
+apis usage:
+```javascript
+import baidu/google/youdao from './app/lib/*'
+
+baidu/google/youdao([string]source text, [string]source language(standard tag), [string]destination language(standard tag))
+    .then(result => {});
+```
+
+translate result:
+```javascript
+[object]result: {
+    from: [string]source language(standard tag),
+    to: [string]destination language(standard tag),
+    src: [string]source text,
+    dst: [string]destination text,
+    dict: [
+        0: [string]part of speech and meaning,
+        1: [string]part of speech and meaning,
+        ...
+    ]
+    sentence: [
+        0: [string]example sentence,
+        1: [string]example sentence,
+        ...
+    ]
+}
+```
+
 ## Testing
 Explain your testing approach: What tests did you plan and execute, what were the use cases you considered. List the test cases you ran.
 
