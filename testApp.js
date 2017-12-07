@@ -1,7 +1,11 @@
+/* eslint-disable */
+// blabla
+/* eslint-enable */
 import React, { Component } from 'react';
 import { View,Alert, Text,StyleSheet,Image,TouchableHighlight, TextInput, FlatList } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import language from './app/lib/language';
+import startwith from './app/lib/dictionary'
 
 class AutoExpandingInput extends Component{
     
@@ -58,14 +62,23 @@ class LocalDataCom extends Component{
 
     constructor(props) {
         super(props);
+        this.state={
+            chooseData:'',
+        };
     }
     
     _keyExtractor = (item,index) => index;
 
+    getPressData = (item,index) =>{//会一直更新状态机 有bug
+        this.setState({
+            chooseData:item[0],
+        })
+    }
+
     _renderItem = ({item,index})=>(
-        <View>
-        <Text>{item}</Text>
-        </View>
+        <TouchableHighlight onPress = {this.getPressData(item,index)} >
+            <Text style={{fontSize:22}} >{item.join('  ')}</Text>
+        </TouchableHighlight>
     )
 
     render(){
@@ -86,20 +99,23 @@ class App extends Component {
         super(props);
         this.state = {
             showTemp : false,
+            localres : [],
+            netres : [],
         }; 
     }
 
-    getLocalData(text){
+    getLocalData=(text)=>{
         
     }
 
-    getNetData(text){
+    getNetData=(text)=>{
         
     }
 
-    _onChangeText(){
+    _onChangeText=(querytext)=>{    
         this.setState({
-            showTemp:!this.state.showTemp
+            showTemp:false,
+            localres:startwith(querytext),
         })
     }
 
@@ -115,7 +131,7 @@ class App extends Component {
                         defaultValue={'源语言'}
                     /> 
 
-                    <TouchableHighlight style={styles.btn} onPress={() => { }}>
+                    <TouchableHighlight style={styles.btn} onPress={this.getLocalData}>
                         <Text>
                             翻译接口
                         </Text>
@@ -130,11 +146,11 @@ class App extends Component {
                     /> 
                 </View>
 
-                <AutoExpandingInput onChangeText={this._onChangeText}
-                    onEndEditing={(event)=>this.getLocalData(event.nativeEvent.text)}
+                <AutoExpandingInput onChangeText={(querytext)=>this._onChangeText(querytext)}
+                    // onEndEditing={(event)=>this.getLocalData(event.nativeEvent.text)}
                 />
                 
-                {this.state.showTemp ? <NetDataCom /> : <LocalDataCom localData={["test:测试","a:一个","this:这个"]} />}
+                {this.state.showTemp ? <NetDataCom /> : <LocalDataCom localData={this.state.localres} />}
 
             </View>
         );
@@ -186,3 +202,9 @@ const styles = StyleSheet.create({
 
 
 export default App;
+
+
+//还差父组件获取点击之后的子组件 就是本地数据点击之后 输入框信息变成本地数据的英语单词(输入框与本地数据之间是兄弟组件)
+//同时触发搜索网络数据 子组件向父组件传值 
+//然后显示网络数据
+//最后显示每日一句
