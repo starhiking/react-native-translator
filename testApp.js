@@ -13,12 +13,11 @@ class AutoExpandingInput extends Component{
     }
 
     onContentSizeChange(event) {
-        this.setState({height: event.nativeEvent.contentSize.height});
+        this.setState({ height: event.nativeEvent.contentSize.height });
     }
-
     render() {
         return (
-            <TextInput {...this.props}  
+            <TextInput {...this.props}
                 multiline={true}
                 onChange={this.onChange}
                 onContentSizeChange={this.onContentSizeChange.bind(this)}   
@@ -116,7 +115,7 @@ class App extends Component {
                         defaultValue={'源语言'}
                     /> 
 
-                    <TouchableHighlight style={styles.btn}>
+                    <TouchableHighlight style={styles.btn} onPress={() => { }}>
                         <Text>
                             翻译接口
                         </Text>
@@ -127,6 +126,7 @@ class App extends Component {
                         dropdownStyle={styles.dropdown_dropdown}
                         options={language.to}
                         defaultValue={'目标语言'}
+
                     /> 
                 </View>
 
@@ -141,7 +141,7 @@ class App extends Component {
     }
 }
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
     edit: {
         marginTop: 15,
         fontSize: 25,

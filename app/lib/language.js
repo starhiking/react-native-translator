@@ -13,7 +13,7 @@ tran['google'] = '谷歌翻译';
 tran['baidu'] = '百度翻译';
 
 module.exports = {
-    "from": from,
-    "to": to,
-    "tran": tran
-}
+    'from': from,
+    'to': to,
+    'tran': tran
+};
