@@ -80,7 +80,7 @@ const baidu = (text, from, to) => {
                     src: json['trans_result']['data'][0]['src'],
                     dst: json['trans_result']['data'][0]['dst'],
                     parts: parts,
-                    sentences: sentences
+                    sentences: sentences,
                 };
             } catch (e) {
                 console.log(json);

@@ -1,14 +1,13 @@
-/* eslint-disable */
-// blabla
-/* eslint-enable */
 import React, { Component } from 'react';
-import { View,Alert, Text,StyleSheet,Image,TouchableHighlight, TextInput, FlatList } from 'react-native';
+import {View,Alert, Text,StyleSheet,Image,TouchableHighlight, TextInput, FlatList, ScrollView } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import language from './app/lib/language';
 import startwith from './app/lib/dictionary';
 import baidu from './app/lib/baidu';
-// import google from './app/lib/google';
-// import youdao from './app/lib/youdao';
+import google from './app/lib/google';
+import youdao from './app/lib/youdao';
+import common from './app/lib/common-result';
+import getDailySentence from './app/lib/daily-sentence';
 
 class AutoExpandingInput extends Component{
 
@@ -22,6 +21,7 @@ class AutoExpandingInput extends Component{
     onContentSizeChange(event) {
         this.setState({ height: event.nativeEvent.contentSize.height });
     }
+    
     render() {
         return (
             <TextInput {...this.props}
@@ -37,26 +37,67 @@ class AutoExpandingInput extends Component{
     }
 }
 
+class APINetDataCom extends Component{
+    constructor(props) {
+        super(props);
+    }
+
+    renderExpenseItem(item , i) {
+        return <View key ={i}><Text key ={i}>{item}</Text></View>
+    }
+
+    render(){
+        var API = this.props.API;
+        if(API==null) return <View />
+        else return(
+            <View>
+                <Text style={{fontSize:22,color:"#B45B3E"}}>{API.engine}:</Text>
+                <View>
+                    <Text>{language.from[API.from]}-->{language.to[API.to]}</Text>
+                    <Text>{API.src}:{API.dst}</Text>
+                    <View>
+                    {  
+                        API.parts.map((mean,i)=>this.renderExpenseItem(mean,i))
+                    }  
+                    </View>
+                <Text />
+                </View>
+            </View>
+        )
+    }
+
+}
+
 class NetDataCom extends Component{
 
     constructor(props) {
         super(props);
     }
 
-    render(){
+    renderSentenceItem(item , i) {
+        return (
+            <View key ={i}>
+                <Text key ={0}>{item[0]}</Text>
+                <Text key={1}>{item[1]}</Text>
+            </View>
+        )
+    }
 
+    render(){
+        var commonData =this.props.commonData;
         return(
             <View style={styles.result}>
-                <Text>数据显示</Text>
-                <View style={styles.baidu}>
-                </View>
-                <View style={styles.google}>
-                </View>
-                <View style={styles.google}>
-                </View>
-                <View style={styles.common}>
-                </View>
+                <APINetDataCom API={this.props.baiduData} />
+                <APINetDataCom API={this.props.youdaoData} />
+                <APINetDataCom API={this.props.googleData} />
+                {commonData==null||commonData.src_pron==""?<Text />:<Text style={{fontSize:22,color:"#B45B3E"}}>发音(pronunciation): </Text>}
+                {commonData==null||commonData.src_pron==""?<Text />:<Text>{commonData.src_pron}-->{commonData.dst_pron} </Text>}
+                {commonData==null||commonData.synonyms.length == 0?<Text />:<Text style={{fontSize:22,color:"#B45B3E"}}>近义词(synonyms): </Text>}
+                {commonData==null||commonData.synonyms.length == 0?<Text />:<Text>{commonData.synonyms.join('     ')}</Text>}
+                {commonData==null||commonData.sentences.length == 0?<Text />:<Text style={{fontSize:22,color:"#B45B3E"}}>例句(sentences): </Text>}
+                {commonData==null?<Text />:commonData.sentences.splice(0,5).map((sentence,i)=>this.renderSentenceItem(sentence,i))}
             </View>
+
         )
     }
 
@@ -73,7 +114,7 @@ class LocalDataCom extends Component{
 
     _keyExtractor = (item,index) => index;
 
-    getPressData = (item,index) =>{//  如果设置press或者click时会一直更新状态机(改成alert就很清楚) 有bug
+    getPressData = (item,index) =>{
         this.setState({
             chooseData:item[0],
         });
@@ -82,7 +123,7 @@ class LocalDataCom extends Component{
 
     _renderItem = ({item,index})=>(
         <TouchableHighlight onPress = {()=>this.getPressData(item,index)} >
-            <Text style={{fontSize:22}} >{item.join('  ')}</Text>
+            <Text style={{fontSize:22}} >{item.join()}</Text>
         </TouchableHighlight>
     )
 
@@ -107,20 +148,52 @@ class App extends Component {
             localres : [],
             netres : [],
             clickData : "",
-        };
+            baiduData:null,
+            googleData:null,
+            youdaoData:null,
+            commonData:null,
+            dailyData:null,
+        }; 
+    }
+
+    componentDidMount() {
+        getDailySentence(3)
+        .then(result => {
+            const text = JSON.stringify(result, null, 4);
+            alert(text);
+            this.setState({ 
+                dailyData: result, 
+            });
+        });
     }
 
     getPressData = (newData)=>{
-        this.setState({
-            showTemp:!this.state.showTemp,
-        });
-        // baidu(newData, 'en', 'zh').then(result => {
-        //     alert(JSON.stringify(result, null, 4).toString());
-        // });
-        youdao(newData, 'en', 'zh').then(result => {
-            alert(JSON.stringify(result, null, 4).toString());
-        });
 
+        common(newData,'en','zh').then(result => {
+            this.setState({
+                commonData:result,
+                showTemp:true,
+            })
+        });
+        baidu(newData, 'en', 'zh').then(result => {
+            this.setState({
+                baiduData:result,
+                showTemp:true
+            })
+        });
+        youdao(newData, 'en', 'zh').then(result => {
+            this.setState({
+                youdaoData:result,
+                showTemp:true,
+            });
+        });
+        google(newData, 'en', 'zh').then(result => {
+            this.setState({
+                googleData:result,
+                showTemp:true,
+            })
+        });
+        
 
     }
 
@@ -139,11 +212,33 @@ class App extends Component {
         })
     }
 
+    _dailyItem = ({item,index})=>{
+        return(
+            <View >
+                <Text>
+                    {item.sentence}
+                </Text>
+                <Text>
+                    {item.translation}
+                </Text>
+                <Image source={{uri:item.thumbnail}} style={{width:100,height:100}} />
+            </View>
+        )
+    }
+    _dateHeader=()=>{
+        var localDate = new Date();
+        var time = localDate.getFullYear()+"-"+(localDate.getMonth()+1)+"-"+(localDate.getDate()+1);
+        return (
+            <Text style={{fontSize:22,color:"#B45B3E"}}>每日一句:{time}</Text>
+        )
+    }
+
+    _keyExtractor = (item,index) => index;
+
     render() {
         return (
-            <View>
+            <ScrollView >
                 <View style={{flexDirection:'row'}}>
-
                     <ModalDropdown style={styles.dropdown}
                         textStyle={styles.dropdown_text}
                         dropdownStyle={styles.dropdown_dropdown}
@@ -162,17 +257,32 @@ class App extends Component {
                         dropdownStyle={styles.dropdown_dropdown}
                         options={language.to}
                         defaultValue={'目标语言'}
-
                     />
                 </View>
 
                 <AutoExpandingInput onChangeText={this._onChangeText}
                     // onEndEditing={(event)=>this.getLocalData(event.nativeEvent.text)}
                 />
+                
+                {this.state.showTemp ? 
+                    <NetDataCom 
+                        baiduData={this.state.baiduData}
+                        googleData={this.state.googleData}
+                        youdaoData={this.state.youdaoData}
+                        commonData = {this.state.commonData}
+                    /> : <LocalDataCom 
+                            localData={this.state.localres} 
+                            onPressData = {this.getPressData} 
+                        />}
 
-                {this.state.showTemp ? <NetDataCom /> : <LocalDataCom localData={this.state.localres} onPressData = {this.getPressData} />}
+                <FlatList 
+                    keyExtractor ={this._keyExtractor}
+                    data={this.state.dailyData}
+                    renderItem={this._dailyItem}
+                    ListHeaderComponent={this._dateHeader}
+                />
 
-            </View>
+            </ScrollView>
         );
     }
 }

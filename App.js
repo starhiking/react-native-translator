@@ -46,14 +46,14 @@ export default class App extends Component {
             alert(JSON.stringify(result, null, 4));
         });
 
-        // getDailySentence(3)
-        //     .then(results => {
-        //         // results是一个数组
-        //         // 每个元素是一个对象
-        //         // 每个对象有date(日期), sentence(英语), translation(中文), thumbnail(小图), image(大图)五个成员
-        //         const text = JSON.stringify(results, null, 4);
-        //         this.setState({ text: text });
-        //     });
+        getDailySentence(3)
+            .then(results => {
+                // results是一个数组
+                // 每个元素是一个对象
+                // 每个对象有date(日期), sentence(英语), translation(中文), thumbnail(小图), image(大图)五个成员
+                const text = JSON.stringify(results, null, 4);
+                this.setState({ text: text });
+            });
     }
 
     render() {
