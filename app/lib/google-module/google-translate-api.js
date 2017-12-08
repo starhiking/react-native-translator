@@ -1,4 +1,7 @@
-// var fetch = require('node-fetch');
+const develop_config = require('../../cfg/develop_config');
+if (develop_config['node-fetch'])
+    var fetch = require('node-fetch');
+
 var token = require('./google-translate-token');
 var languages = require('./google-translate-languages');
 

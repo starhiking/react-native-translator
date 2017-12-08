@@ -13,4 +13,19 @@ const languages = {
     }
 };
 
-export default languages;
+// 项目结束时换成英文UI
+const languages_english = {
+    source: {
+        auto: 'Auto-Detect',
+        zh: 'Chinese',
+        en: 'English',
+        ja: 'Japanese',
+    },
+    destination: {
+        zh: 'Chinese',
+        en: 'English',
+        ja: 'Japanese',
+    }
+};
+
+module.exports = languages;

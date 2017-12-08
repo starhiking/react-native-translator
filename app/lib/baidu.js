@@ -1,4 +1,8 @@
-// const fetch = require('node-fetch');
+const develop_config = require('../cfg/develop_config');
+if (develop_config['node-fetch'])
+    var fetch = require('node-fetch');
+
+const { isalpha } = require('./yukimilib');
 
 // map standard language tags into baidu language tags
 const map = {
@@ -18,7 +22,7 @@ const map_inverse = {
 const baidu = (text, from, to) => {
     from = map[from];
     to = map[to];
-    if (from === undefined || to === undefined)
+    if (from === undefined || to === undefined || from === to)
         throw new Error(`baidu: unsupported source/destination: from ${from} to ${to}`);
 
     // construct the request
@@ -29,29 +33,49 @@ const baidu = (text, from, to) => {
         .then(body => {
             const json = JSON.parse(body);
 
+            let sentences = [];
+            try {
+                sentences = JSON.parse(json['liju_result']['double']);
+                // parse a complex json
+                sentences = sentences.map(sentence => [
+                    sentence[0].map(word => (isalpha(word[0][0]) ? ` ${word[0]}` : word[0])).join('').trim(),
+                    sentence[1].map(word => (isalpha(word[0][0]) ? ` ${word[0]}` : word[0])).join('').trim(),
+                ]);
+            } catch (e) {
+                // 'sentences' may not exist, such as when query is a sentence
+                let sentences = [];
+            }
+
             let parts = [];
             try {
                 parts = json['dict_result']['simple_means']['symbols'][0]['parts'];
-                parts = parts.map((value, index) => `${value['part']} ${value['means'].join('; ')}`);
+                if (parts[0]['part_name'] !== undefined) {
+                    parts = parts[0]['means'];
+                    parts = parts.map(value => `${value['part']} ${value['text']}`);
+                } else {
+                    parts = parts.map(value => `${value['part']} ${value['means'].join('; ')}`);
+                }
             } catch (e) {
-                // parts of speech may not exist, such as sentences
+                // 'parts' of speech may not exist, such as when query is a sentence
                 parts = [];
             }
 
-            return {
-                from: map_inverse[json['trans_result']['from']],
-                to: map_inverse[json['trans_result']['to']],
-                src: json['trans_result']['data'][0]['src'],
-                dst: json['trans_result']['data'][0]['dst'],
-                parts: parts,
-                sentence: []
-            };
+            let result = {};
+            try {
+                result = {
+                    from: map_inverse[json['trans_result']['from']],
+                    to: map_inverse[json['trans_result']['to']],
+                    src: json['trans_result']['data'][0]['src'],
+                    dst: json['trans_result']['data'][0]['dst'],
+                    parts: parts,
+                    sentences: sentences
+                };
+            } catch (e) {
+                console.log(json);
+            }
+
+            return result;
         });
 };
 
-export default baidu;
-
-// baidu('this is a sentence', 'en', 'zh')
-//     .then(result => {
-//         console.log(result);
-//     });
+module.exports = baidu;

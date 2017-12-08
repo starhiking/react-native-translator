@@ -5,7 +5,9 @@
  * Everything between 'BEGIN' and 'END' was copied from the url above.
  */
 
-// var fetch = require('node-fetch');
+const develop_config = require('../../cfg/develop_config');
+if (develop_config['node-fetch'])
+    var fetch = require('node-fetch');
 
 /* eslint-disable */
 // BEGIN

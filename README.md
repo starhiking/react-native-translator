@@ -33,8 +33,14 @@ translate result:
         ...
     ]
     sentence: [
-        0: [string]example sentence,
-        1: [string]example sentence,
+        0: [
+            0: [string]example sentence source part,
+            1: [string]example sentence destination part
+        ]
+        1: [
+            0: [string]example sentence source part,
+            1: [string]example sentence destination part
+        ]
         ...
     ]
 }

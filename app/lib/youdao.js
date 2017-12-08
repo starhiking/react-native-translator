@@ -1,5 +1,8 @@
+const develop_config = require('../cfg/develop_config');
+if (develop_config['node-fetch'])
+    var fetch = require('node-fetch');
+
 const md5 = require('md5');
-// const fetch = require('node-fetch');
 
 const appKey = '2d8e89a6fd072117';
 const secretKey = 'HiX7rGmYRad3ISMLYexRLfpkJi2taMPh';
@@ -18,10 +21,11 @@ const map_inverse = {
     en: 'en',
     ja: 'ja'
 };
+
 const youdao = (text, from, to) => {
     from = map[from];
     to = map[to];
-    if (from === undefined || to === undefined)
+    if (from === undefined || to === undefined || from === to)
         throw new Error(`youdao: unsupported source/destination: from ${from} to ${to}`);
 
     // construct the request
@@ -38,7 +42,7 @@ const youdao = (text, from, to) => {
             try {
                 parts = json['basic']['explains'];
             } catch (e) {
-                // parts of speech may not exist, such as sentences
+                // 'parts' of speech may not exist, such as sentences
                 parts = [];
             }
 
@@ -48,14 +52,9 @@ const youdao = (text, from, to) => {
                 src: json['query'],
                 dst: json['translation'][0],
                 parts: parts,
-                sentence: []
+                sentences: [] // youdao doesn't support example sentences
             };
         });
 };
 
-export default youdao;
-
-// youdao('这是一个句子', 'zh', 'en')
-//     .then(result => {
-//         console.log(result);
-//     });
+module.exports = youdao;

@@ -1,0 +1,352 @@
+
+**************************************************
+baidu: Chinese WORD "说" from zh to ja
+**************************************************
+{
+    "from": "zh",
+    "to": "ja",
+    "src": "说",
+    "dst": "言う",
+    "parts": [],
+    "sentences": []
+}
+**************************************************
+baidu: Chinese WORD "说" from ja to en
+**************************************************
+{
+    "from": "ja",
+    "to": "en",
+    "src": "说",
+    "dst": "Said",
+    "parts": [],
+    "sentences": []
+}
+**************************************************
+baidu: Chinese WORD "说" from auto to en
+**************************************************
+{
+    "from": "zh",
+    "to": "en",
+    "src": "说",
+    "dst": "say",
+    "parts": [],
+    "sentences": []
+}
+**************************************************
+baidu: Chinese WORD "说" from en to ja
+**************************************************
+{
+    "from": "en",
+    "to": "ja",
+    "src": "说",
+    "dst": "说",
+    "parts": [],
+    "sentences": []
+}
+**************************************************
+baidu: Chinese WORD "说" from en to zh
+**************************************************
+{
+    "from": "en",
+    "to": "zh",
+    "src": "说",
+    "dst": "说",
+    "parts": [
+        "vi. say",
+        "vt.& vi. speak",
+        "v. talk",
+        "n. theory"
+    ],
+    "sentences": [
+        [
+            "我同意你刚说的每句话。",
+            "I agree with every word you've just said"
+        ],
+        [
+            "他说了又说，我还是不懂。",
+            "He explained and explained, but I still couldn't understand."
+        ],
+        [
+            "孩子做错了事，母亲说了他一顿。",
+            "The mother gave her child a scolding for his wrongdoing."
+        ],
+        [
+            "你这话说得是啊。",
+            "What you say is quite true."
+        ],
+        [
+            "请说慢一点儿。",
+            "Please speak more slowly."
+        ],
+        [
+            "她能说德语和法语，更不用说英语了。",
+            "She can speak German and French, not to speak of English."
+        ],
+        [
+            "他说个不停。",
+            "He talks without stopping."
+        ],
+        [
+            "我想我已经说得够多了。",
+            "I think I have said enough"
+        ],
+        [
+            "他说了什么？",
+            "What did he say?"
+        ],
+        [
+            "他问我是否和你一块儿离开的，我说不是。",
+            "He asked if I had left with you, and I said no"
+        ],
+        [
+            "“他和斯坦夫人有个计划，”她解释说。",
+            "' He and Mrs Stein have a plan,' she explained"
+        ],
+        [
+            "我不能把他说的话告诉你。",
+            "I can't tell you what he said"
+        ],
+        [
+            "主席夫人，我不得不这么说。",
+            "I have to say this, Madam Chairman."
+        ],
+        [
+            "杰米给我发了电子邮件，说他不能来了。",
+            "Jamie e-mailed me to say he couldn't come"
+        ],
+        [
+            "“你一定冻坏了，”她说。",
+            "' You must be freezing,' she said."
+        ],
+        [
+            "我解释说自己是个艺术家。",
+            "I explained that I was an artist"
+        ],
+        [
+            "“那简直是疯了，”我说。“谁说不是呢？”他说。",
+            "' That's crazy,' I said.' Isn't it just?' he said"
+        ],
+        [
+            "我所能说的只有“对不起”。",
+            "All I could say was,' I'm sorry'."
+        ],
+        [
+            "我是说，你真是太疯狂了。",
+            "I mean, how crazy can you get?"
+        ],
+        [
+            "我告诉她我的名字后，她就什么也不说了。",
+            "As soon as I told her my name, she clammed up."
+        ],
+        [
+            "和平常一样，爸爸在和所有的女士调情，或者说所有的女士都在和他调情。",
+            "Dad's flirting with all the ladies, or they're all flirting with him, as usual"
+        ],
+        [
+            "如果有了纷争，我们就说清楚。",
+            "If there's a dispute we argue it out"
+        ],
+        [
+            "我敢说他按照要求做了。",
+            "I dare say he did as he was bidden."
+        ],
+        [
+            "重复我对你说的话，你真是个捣蛋鬼。",
+            "You are a bad boy for repeating what I told you"
+        ],
+        [
+            "我走进房间，告诉她我有话要和她说。",
+            "I went in the room and told her I had something to say to her"
+        ],
+        [
+            "格雷戈里和卡门说了知心话。",
+            "Gregory shared confidences with Carmen."
+        ],
+        [
+            "“我曾经和你一样迷惑，”她意味深长地说。",
+            "' I was once as bewildered as you are,' she said meaningfully."
+        ],
+        [
+            "我对此完全赞成，但是乌尔夫说不行。",
+            "I was all for it, but Wolfe said no."
+        ],
+        [
+            "老实说我以为再也不用见到你了。",
+            "I honestly thought I'd seen the last of you."
+        ],
+        [
+            "艾丽斯证实了布莱尔所说的。",
+            "Alice corroborated what Blair had said."
+        ]
+    ]
+}
+**************************************************
+baidu: Chinese WORD "说" from ja to zh
+**************************************************
+{
+    "from": "ja",
+    "to": "zh",
+    "src": "说",
+    "dst": "说",
+    "parts": [],
+    "sentences": []
+}
+**************************************************
+baidu: Chinese WORD "说" from auto to zh
+**************************************************
+{
+    "from": "zh",
+    "to": "en",
+    "src": "说",
+    "dst": "say",
+    "parts": [],
+    "sentences": []
+}
+**************************************************
+baidu: Chinese WORD "说" from auto to ja
+**************************************************
+{
+    "from": "zh",
+    "to": "ja",
+    "src": "说",
+    "dst": "言う",
+    "parts": [],
+    "sentences": []
+}
+**************************************************
+baidu: Chinese WORD "说" from zh to en
+**************************************************
+{
+    "from": "zh",
+    "to": "en",
+    "src": "说",
+    "dst": "say",
+    "parts": [
+        "vi. say",
+        "vt.& vi. speak",
+        "v. talk",
+        "n. theory"
+    ],
+    "sentences": [
+        [
+            "我同意你刚说的每句话。",
+            "I agree with every word you've just said"
+        ],
+        [
+            "他说了又说，我还是不懂。",
+            "He explained and explained, but I still couldn't understand."
+        ],
+        [
+            "孩子做错了事，母亲说了他一顿。",
+            "The mother gave her child a scolding for his wrongdoing."
+        ],
+        [
+            "你这话说得是啊。",
+            "What you say is quite true."
+        ],
+        [
+            "请说慢一点儿。",
+            "Please speak more slowly."
+        ],
+        [
+            "她能说德语和法语，更不用说英语了。",
+            "She can speak German and French, not to speak of English."
+        ],
+        [
+            "他说个不停。",
+            "He talks without stopping."
+        ],
+        [
+            "我想我已经说得够多了。",
+            "I think I have said enough"
+        ],
+        [
+            "他说了什么？",
+            "What did he say?"
+        ],
+        [
+            "他问我是否和你一块儿离开的，我说不是。",
+            "He asked if I had left with you, and I said no"
+        ],
+        [
+            "“他和斯坦夫人有个计划，”她解释说。",
+            "' He and Mrs Stein have a plan,' she explained"
+        ],
+        [
+            "我不能把他说的话告诉你。",
+            "I can't tell you what he said"
+        ],
+        [
+            "主席夫人，我不得不这么说。",
+            "I have to say this, Madam Chairman."
+        ],
+        [
+            "杰米给我发了电子邮件，说他不能来了。",
+            "Jamie e-mailed me to say he couldn't come"
+        ],
+        [
+            "“你一定冻坏了，”她说。",
+            "' You must be freezing,' she said."
+        ],
+        [
+            "我解释说自己是个艺术家。",
+            "I explained that I was an artist"
+        ],
+        [
+            "“那简直是疯了，”我说。“谁说不是呢？”他说。",
+            "' That's crazy,' I said.' Isn't it just?' he said"
+        ],
+        [
+            "我所能说的只有“对不起”。",
+            "All I could say was,' I'm sorry'."
+        ],
+        [
+            "我是说，你真是太疯狂了。",
+            "I mean, how crazy can you get?"
+        ],
+        [
+            "我告诉她我的名字后，她就什么也不说了。",
+            "As soon as I told her my name, she clammed up."
+        ],
+        [
+            "和平常一样，爸爸在和所有的女士调情，或者说所有的女士都在和他调情。",
+            "Dad's flirting with all the ladies, or they're all flirting with him, as usual"
+        ],
+        [
+            "如果有了纷争，我们就说清楚。",
+            "If there's a dispute we argue it out"
+        ],
+        [
+            "我敢说他按照要求做了。",
+            "I dare say he did as he was bidden."
+        ],
+        [
+            "重复我对你说的话，你真是个捣蛋鬼。",
+            "You are a bad boy for repeating what I told you"
+        ],
+        [
+            "我走进房间，告诉她我有话要和她说。",
+            "I went in the room and told her I had something to say to her"
+        ],
+        [
+            "格雷戈里和卡门说了知心话。",
+            "Gregory shared confidences with Carmen."
+        ],
+        [
+            "“我曾经和你一样迷惑，”她意味深长地说。",
+            "' I was once as bewildered as you are,' she said meaningfully."
+        ],
+        [
+            "我对此完全赞成，但是乌尔夫说不行。",
+            "I was all for it, but Wolfe said no."
+        ],
+        [
+            "老实说我以为再也不用见到你了。",
+            "I honestly thought I'd seen the last of you."
+        ],
+        [
+            "艾丽斯证实了布莱尔所说的。",
+            "Alice corroborated what Blair had said."
+        ]
+    ]
+}

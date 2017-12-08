@@ -1,4 +1,7 @@
-// const fetch = require('node-fetch');
+const develop_config = require('../cfg/develop_config');
+if (develop_config['node-fetch'])
+    var fetch = require('node-fetch');
+
 const translate = require('./google-module/google-translate-api');
 
 // map standard language tags into google language tags
@@ -19,9 +22,8 @@ const map_inverse = {
 const google = (text, from, to) => {
     from = map[from];
     to = map[to];
-    if (from === undefined || to === undefined)
+    if (from === undefined || to === undefined || from === to)
         throw new Error(`google: unsupported source/destination: from ${from} to ${to}`);
-
 
     return translate(text, { from: from, to: to, raw: true })
         .then(res => {
@@ -31,7 +33,7 @@ const google = (text, from, to) => {
             try {
                 parts = json[1].map((value, index) => `${value[0]}: ${value[1].join('; ')}`);
             } catch (e) {
-                // parts of speech may not exist, such as sentences
+                // 'parts' of speech may not exist, such as sentences
                 parts = [];
             }
 
@@ -41,14 +43,9 @@ const google = (text, from, to) => {
                 src: json[0][0][1],
                 dst: json[0][0][0],
                 parts: parts,
-                sentence: []
+                sentences: []
             };
         });
 };
 
-export default google;
-
-// google('测试', 'auto', 'en')
-//     .then(result => {
-//         console.log(result);
-//     });
+module.exports = google;
