@@ -21,17 +21,18 @@ class AutoExpandingInput extends Component{
     onContentSizeChange(event) {
         this.setState({ height: event.nativeEvent.contentSize.height });
     }
-    
+
+
     render() {
         return (
             <TextInput {...this.props}
                 multiline={true}
-                onChange={this.onChange}
                 onContentSizeChange={this.onContentSizeChange.bind(this)}
                 style={[styles.edit,{height:Math.max(100,this.state.height)}]}
-                value={this.state.text}
+                defaultValue={this.props.queryValue}
                 underlineColorAndroid='transparent'
                 placeholder="输入文字即可翻译"
+                
             />
         );
     }
@@ -144,6 +145,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            querytext:"",
             showTemp : false,
             localres : [],
             netres : [],
@@ -160,7 +162,6 @@ class App extends Component {
         getDailySentence(3)
         .then(result => {
             const text = JSON.stringify(result, null, 4);
-            alert(text);
             this.setState({ 
                 dailyData: result, 
             });
@@ -168,6 +169,10 @@ class App extends Component {
     }
 
     getPressData = (newData)=>{
+
+        this.setState({
+            querytext:newData,
+        });
 
         common(newData,'en','zh').then(result => {
             this.setState({
@@ -205,10 +210,11 @@ class App extends Component {
 
     }
 
-    _onChangeText=(querytext)=>{
+    _onChangeText=(text)=>{
         this.setState({
             showTemp:false,
-            localres:startwith(querytext),
+            localres:startwith(text),
+            querytext:text,
         })
     }
 
@@ -261,6 +267,7 @@ class App extends Component {
                 </View>
 
                 <AutoExpandingInput onChangeText={this._onChangeText}
+                    queryValue = {this.state.querytext}
                     // onEndEditing={(event)=>this.getLocalData(event.nativeEvent.text)}
                 />
                 
@@ -330,11 +337,4 @@ const styles = StyleSheet.create({
     },
 });
 
-
 export default App;
-
-
-//还差父组件获取点击之后的子组件 就是本地数据点击之后 输入框信息变成本地数据的英语单词(输入框与本地数据之间是兄弟组件)
-//同时触发搜索网络数据 子组件向父组件传值
-//然后显示网络数据
-//最后显示每日一句
