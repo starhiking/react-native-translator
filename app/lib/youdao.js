@@ -6,8 +6,8 @@
  *     I applied for an API account at Youdao's official website, study the usage through its documentation.
  */
 
-const develop_config = require('../cfg/develop_config');
-if (develop_config['node-fetch'] === true) {
+const { node_fetch } = require('../cfg/develop_config');
+if (node_fetch) {
     eval('var fetch = require(\'node-fetch\')');
 }
 
@@ -58,6 +58,7 @@ const youdao = (text, from, to) => {
             }
 
             return {
+                engine: '有道(Youdao)',
                 from: map_inverse[json['l'].slice(0, json['l'].indexOf('2')).toLowerCase()],
                 to: map_inverse[json['l'].slice(json['l'].indexOf('2') + 1).toLowerCase()],
                 src: json['query'],

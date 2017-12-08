@@ -6,8 +6,8 @@
  */
 
 
-const develop_config = require('../../cfg/develop_config');
-if (develop_config['node-fetch'] === true) {
+const { node_fetch } = require('../../cfg/develop_config');
+if (node_fetch) {
     eval('var fetch = require(\'node-fetch\')');
 }
 

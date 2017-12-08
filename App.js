@@ -3,7 +3,7 @@ import { Alert, Text } from 'react-native';
 import baidu from './app/lib/baidu';
 import google from './app/lib/google';
 import youdao from './app/lib/youdao';
-import example from './app/lib/example-sentences';
+import common from './app/lib/common-result';
 import getDailySentence from './app/lib/daily-sentence';
 
 export default class App extends Component {
@@ -34,11 +34,15 @@ export default class App extends Component {
         //     alert(JSON.stringify(result, null, 4).toString());
         // });
 
-        example('show', 'en', 'zh').then(result => {
-            // result是一个数组
-            // 前面的元素是百度例句，后面的是谷歌例句
-            // 数组里每一项是个二元组，0号位是源语言句子（基本是英文）
-            // 1号位是目标语言句子（基本是中文，谷歌的这一段为空字符串）
+        common('show', 'en', 'zh').then(result => {
+            // result是一个对象
+            //  - sentences: 例句数组
+            //        前面的元素是百度例句，后面的是谷歌例句
+            //        数组里每一项是个二元组，0号位是源语言句子（基本是英文）
+            //        1号位是目标语言句子（基本是中文，谷歌的这一段为空字符串）
+            //  - src_pron: 源文字发音
+            //  - dst_pron: 目标文字发音
+            //  - synonyms: 源文字近义词，一个数组
             alert(JSON.stringify(result, null, 4));
         });
 

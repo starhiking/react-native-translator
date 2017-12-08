@@ -1,16 +1,17 @@
-let from = [];
-from['auto'] = '自动检测';
-from['zh'] = '中文';
-from['en'] = '英语';
+const { ui_language } = require('../cfg/config.json');
+const { language_map, engine_map } = require('../cfg/develop_config');
 
-let to = [];
-to['zh'] = '中文';
-to['en'] = '英语';
+let from = [], to = [], tran = [];
 
-let tran = [];
-tran['youdao'] = '有道翻译';
-tran['google'] = '谷歌翻译';
-tran['baidu'] = '百度翻译';
+for (let k in language_map[ui_language]) {
+    from[k] = language_map[ui_language][k];
+    to[k] = language_map[ui_language][k];
+}
+delete to['auto'];
+
+for (let k in engine_map[ui_language]) {
+    tran[k] = engine_map[ui_language][k];
+}
 
 module.exports = {
     'from': from,

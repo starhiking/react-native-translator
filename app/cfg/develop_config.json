@@ -1,3 +1,31 @@
 {
-    "node-fetch": false
+    "node_fetch": false,
+    "language_map": {
+        "zh": {
+            "auto": "自动检测",
+            "zh": "中文",
+            "en": "英语",
+            "ja": "日语",
+            "fr": "法语"
+        },
+        "en": {
+            "auto": "Auto-Detect",
+            "zh": "Chinese",
+            "en": "English",
+            "ja": "Japanese",
+            "fr": "French"
+        }
+    },
+    "engine_map": {
+        "zh": {
+            "baidu": "百度翻译",
+            "google": "谷歌翻译",
+            "youdao": "有道翻译"
+        },
+        "en": {
+            "baidu": "Baidu",
+            "google": "Google",
+            "youdao": "Youdao"
+        }
+    }
 }

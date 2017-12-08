@@ -13,7 +13,7 @@ const translate = require('./google-module/google-translate-api');
 // map standard language tags into google language tags
 const map = {
     auto: 'auto',
-    zh: 'zh-cn',
+    zh: 'zh-CN',
     en: 'en',
     ja: 'ja',
     fr: 'fr'
@@ -21,7 +21,7 @@ const map = {
 // map google language tags into standard language tags
 const map_inverse = {
     auto: 'auto',
-    'zh-cn': 'zh',
+    'zh-CN': 'zh',
     en: 'en',
     ja: 'ja',
     fr: 'fr'
@@ -53,16 +53,34 @@ const google = (text, from, to) => {
                 ]);
             } catch (e) {
                 // 'sentences' may not exist, such as when query is a sentence
-                let sentences = [];
+                sentences = [];
+            }
+
+            let synonyms = new Set();
+            try {
+                json[1].forEach(part => {
+                    part[2].forEach(means => {
+                        means[1].forEach(mean => {
+                            synonyms.add(mean);
+                        });
+                    });
+                });
+                synonyms = [...synonyms];
+            } catch (e) {
+                synonyms = [];
             }
 
             return {
+                engine: '谷歌(Google)',
                 from: map_inverse[json[2]],
                 to: map_inverse[to],
                 src: json[0][0][1],
                 dst: json[0][0][0],
                 parts: parts,
-                sentences: sentences
+                sentences: sentences,
+                src_pron: json[0][1][3],
+                dst_pron: json[0][1][2],
+                synonyms: synonyms
             };
         });
 };

@@ -6,8 +6,8 @@
  *     It's analysed by myself(including the API address, the return JSON format, .etc), with Chrome F12 comtrol panel.
  */
 
-const develop_config = require('../cfg/develop_config');
-if (develop_config['node-fetch'] === true) {
+const { node_fetch } = require('../cfg/develop_config');
+if (node_fetch) {
     eval('var fetch = require(\'node-fetch\')');
 }
 
@@ -68,12 +68,13 @@ const baidu = (text, from, to) => {
                 ]);
             } catch (e) {
                 // 'sentences' may not exist, such as when query is a sentence
-                let sentences = [];
+                sentences = [];
             }
 
             let result = {};
             try {
                 result = {
+                    engine: '百度(Baidu)',
                     from: map_inverse[json['trans_result']['from']],
                     to: map_inverse[json['trans_result']['to']],
                     src: json['trans_result']['data'][0]['src'],
