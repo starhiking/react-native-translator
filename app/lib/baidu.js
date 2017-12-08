@@ -1,20 +1,33 @@
-const {
-    isalpha
-} = require('./yukimilib');
+/**
+ * Author: Yan Nan
+ * Description:
+ *     Baidu translation: http://fanyi.baidu.com/
+ *     API: http://fanyi.baidu.com/v2transapi
+ *     It's analysed by myself(including the API address, the return JSON format, .etc), with Chrome F12 comtrol panel.
+ */
+
+const develop_config = require('../cfg/develop_config');
+if (develop_config['node-fetch'] === true) {
+    eval('var fetch = require(\'node-fetch\')');
+}
+
+const { isalpha } = require('./yukimilib');
 
 // map standard language tags into baidu language tags
 const map = {
     auto: 'auto',
     zh: 'zh',
     en: 'en',
-    ja: 'jp'
+    ja: 'jp',
+    fr: 'fra'
 };
 // map baidu language tags into standard language tags
 const map_inverse = {
     auto: 'auto',
     zh: 'zh',
     en: 'en',
-    jp: 'ja'
+    jp: 'ja',
+    fra: 'fr'
 };
 
 const baidu = (text, from, to) => {
@@ -31,19 +44,6 @@ const baidu = (text, from, to) => {
         .then(body => {
             const json = JSON.parse(body);
 
-            let sentences = [];
-            try {
-                sentences = JSON.parse(json['liju_result']['double']);
-                // parse a complex json
-                sentences = sentences.map(sentence => [
-                    sentence[0].map(word => (isalpha(word[0][0]) ? ` ${word[0]}` : word[0])).join('').trim(),
-                    sentence[1].map(word => (isalpha(word[0][0]) ? ` ${word[0]}` : word[0])).join('').trim(),
-                ]);
-            } catch (e) {
-                // 'sentences' may not exist, such as when query is a sentence
-                let sentences = [];
-            }
-
             let parts = [];
             try {
                 parts = json['dict_result']['simple_means']['symbols'][0]['parts'];
@@ -56,6 +56,19 @@ const baidu = (text, from, to) => {
             } catch (e) {
                 // 'parts' of speech may not exist, such as when query is a sentence
                 parts = [];
+            }
+
+            let sentences = [];
+            try {
+                sentences = JSON.parse(json['liju_result']['double']);
+                // parse a complex json
+                sentences = sentences.map(sentence => [
+                    sentence[0].map(word => (isalpha(word[0][0]) ? ` ${word[0]}` : word[0])).join('').trim(),
+                    sentence[1].map(word => (isalpha(word[0][0]) ? ` ${word[0]}` : word[0])).join('').trim(),
+                ]);
+            } catch (e) {
+                // 'sentences' may not exist, such as when query is a sentence
+                let sentences = [];
             }
 
             let result = {};

@@ -7,11 +7,11 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import language from './app/lib/language';
 import startwith from './app/lib/dictionary';
 import baidu from './app/lib/baidu';
-import google from './app/lib/google';
-import youdao from './app/lib/youdao';
+// import google from './app/lib/google';
+// import youdao from './app/lib/youdao';
 
 class AutoExpandingInput extends Component{
-     
+
     constructor(props) {
         super(props);
         this.state = {
@@ -27,7 +27,7 @@ class AutoExpandingInput extends Component{
             <TextInput {...this.props}
                 multiline={true}
                 onChange={this.onChange}
-                onContentSizeChange={this.onContentSizeChange.bind(this)}   
+                onContentSizeChange={this.onContentSizeChange.bind(this)}
                 style={[styles.edit,{height:Math.max(100,this.state.height)}]}
                 value={this.state.text}
                 underlineColorAndroid='transparent'
@@ -70,7 +70,7 @@ class LocalDataCom extends Component{
             chooseData:'',
         };
     }
-    
+
     _keyExtractor = (item,index) => index;
 
     getPressData = (item,index) =>{//  如果设置press或者click时会一直更新状态机(改成alert就很清楚) 有bug
@@ -89,7 +89,7 @@ class LocalDataCom extends Component{
     render(){
         let localData = this.props.localData;
             return(
-                <FlatList 
+                <FlatList
                     data={localData}
                     keyExtractor = {this._keyExtractor}
                     renderItem = {this._renderItem}
@@ -107,7 +107,7 @@ class App extends Component {
             localres : [],
             netres : [],
             clickData : "",
-        }; 
+        };
     }
 
     getPressData = (newData)=>{
@@ -121,18 +121,18 @@ class App extends Component {
             alert(JSON.stringify(result, null, 4).toString());
         });
 
-        
+
     }
 
     getLocalData=(text)=>{
-        
+
     }
 
     getNetData=(text)=>{
-        
+
     }
 
-    _onChangeText=(querytext)=>{    
+    _onChangeText=(querytext)=>{
         this.setState({
             showTemp:false,
             localres:startwith(querytext),
@@ -149,7 +149,7 @@ class App extends Component {
                         dropdownStyle={styles.dropdown_dropdown}
                         options={language.from}
                         defaultValue={'源语言'}
-                    /> 
+                    />
 
                     <TouchableHighlight style={styles.btn} onPress={this.getLocalData}>
                         <Text>
@@ -163,13 +163,13 @@ class App extends Component {
                         options={language.to}
                         defaultValue={'目标语言'}
 
-                    /> 
+                    />
                 </View>
 
                 <AutoExpandingInput onChangeText={this._onChangeText}
                     // onEndEditing={(event)=>this.getLocalData(event.nativeEvent.text)}
                 />
-                
+
                 {this.state.showTemp ? <NetDataCom /> : <LocalDataCom localData={this.state.localres} onPressData = {this.getPressData} />}
 
             </View>
@@ -225,6 +225,6 @@ export default App;
 
 
 //还差父组件获取点击之后的子组件 就是本地数据点击之后 输入框信息变成本地数据的英语单词(输入框与本地数据之间是兄弟组件)
-//同时触发搜索网络数据 子组件向父组件传值 
+//同时触发搜索网络数据 子组件向父组件传值
 //然后显示网络数据
 //最后显示每日一句

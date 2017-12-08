@@ -1,3 +1,16 @@
+/**
+ * Author: Yan Nan
+ * Description:
+ *     Most codes of this folder are from npm module 'google-translate-api'.
+ *     That module itself is based on node.js and other npm modules, which can not run on React Native.
+ *     I pulled the code out, changed the network module into 'fetch', replaced other modules' code with my own.
+ */
+
+const develop_config = require('../../cfg/develop_config');
+if (develop_config['node-fetch'] === true) {
+    eval('var fetch = require(\'node-fetch\')');
+}
+
 var token = require('./google-translate-token');
 var languages = require('./google-translate-languages');
 
@@ -78,12 +91,7 @@ function translate(text, opts) {
                 result.raw = res_body;
             }
 
-            // console.log('before');
-            // console.log(typeof res_body);
-            // var body = safeEval(res_body);
             var body = JSON.parse(res_body);
-            // console.log('after');
-            // console.log(typeof body);
             body[0].forEach(function (obj) {
                 if (obj[0]) {
                     result.text += obj[0];

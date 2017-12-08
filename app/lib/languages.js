@@ -5,11 +5,13 @@ const languages = {
         zh: '中文',
         en: '英语',
         ja: '日语',
+        fr: '法语'
     },
     destination: {
         zh: '中文',
         en: '英语',
         ja: '日语',
+        fr: '法语'
     }
 };
 
@@ -20,11 +22,13 @@ const languages_english = {
         zh: 'Chinese',
         en: 'English',
         ja: 'Japanese',
+        fr: 'French'
     },
     destination: {
         zh: 'Chinese',
         en: 'English',
         ja: 'Japanese',
+        fr: 'French'
     }
 };
 

@@ -1,4 +1,16 @@
-// const fetch = require('node-fetch');
+/**
+ * Author: Yan Nan
+ * Description:
+ *     Get daily English-Chinese sentences from iciba.com
+ *     API: http://sentence.iciba.com/index.php
+ *     It's analysed by myself(including the API address, the return JSON format, .etc), with Chrome F12 comtrol panel.
+ */
+
+const develop_config = require('../cfg/develop_config');
+if (develop_config['node-fetch'] === true) {
+    eval('var fetch = require(\'node-fetch\')');
+}
+
 const { printf } = require('./yukimilib');
 
 const crawlDailySentence = (date) => {

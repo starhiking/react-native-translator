@@ -1,3 +1,16 @@
+/**
+ * Author: Yan Nan
+ * Description:
+ *     Youdao translation: http://fanyi.youdao.com/
+ *     API: http://openapi.youdao.com/api
+ *     I applied for an API account at Youdao's official website, study the usage through its documentation.
+ */
+
+const develop_config = require('../cfg/develop_config');
+if (develop_config['node-fetch'] === true) {
+    eval('var fetch = require(\'node-fetch\')');
+}
+
 const md5 = require('md5');
 
 const appKey = '2d8e89a6fd072117';
@@ -8,14 +21,16 @@ const map = {
     auto: 'auto',
     zh: 'zh-chs',
     en: 'en',
-    ja: 'ja'
+    ja: 'ja',
+    fr: 'fr'
 };
 // map youdao language tags into standard language tags
 const map_inverse = {
     auto: 'auto',
     'zh-chs': 'zh',
     en: 'en',
-    ja: 'ja'
+    ja: 'ja',
+    fr: 'fr'
 };
 
 const youdao = (text, from, to) => {
