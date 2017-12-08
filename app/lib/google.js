@@ -1,6 +1,4 @@
-const develop_config = require('../cfg/develop_config');
-if (develop_config['node-fetch'])
-    var fetch = require('node-fetch');
+
 
 const translate = require('./google-module/google-translate-api');
 

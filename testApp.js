@@ -5,10 +5,13 @@ import React, { Component } from 'react';
 import { View,Alert, Text,StyleSheet,Image,TouchableHighlight, TextInput, FlatList } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import language from './app/lib/language';
-import startwith from './app/lib/dictionary'
+import startwith from './app/lib/dictionary';
+import baidu from './app/lib/baidu';
+import google from './app/lib/google';
+import youdao from './app/lib/youdao';
 
 class AutoExpandingInput extends Component{
-    
+     
     constructor(props) {
         super(props);
         this.state = {
@@ -35,6 +38,7 @@ class AutoExpandingInput extends Component{
 }
 
 class NetDataCom extends Component{
+
     constructor(props) {
         super(props);
     }
@@ -69,14 +73,15 @@ class LocalDataCom extends Component{
     
     _keyExtractor = (item,index) => index;
 
-    getPressData = (item,index) =>{//会一直更新状态机 有bug
+    getPressData = (item,index) =>{//  如果设置press或者click时会一直更新状态机(改成alert就很清楚) 有bug
         this.setState({
             chooseData:item[0],
-        })
+        });
+        this.props.onPressData(item[0]);
     }
 
     _renderItem = ({item,index})=>(
-        <TouchableHighlight onPress = {this.getPressData(item,index)} >
+        <TouchableHighlight onPress = {()=>this.getPressData(item,index)} >
             <Text style={{fontSize:22}} >{item.join('  ')}</Text>
         </TouchableHighlight>
     )
@@ -101,7 +106,22 @@ class App extends Component {
             showTemp : false,
             localres : [],
             netres : [],
+            clickData : "",
         }; 
+    }
+
+    getPressData = (newData)=>{
+        this.setState({
+            showTemp:!this.state.showTemp,
+        });
+        // baidu(newData, 'en', 'zh').then(result => {
+        //     alert(JSON.stringify(result, null, 4).toString());
+        // });
+        youdao(newData, 'en', 'zh').then(result => {
+            alert(JSON.stringify(result, null, 4).toString());
+        });
+
+        
     }
 
     getLocalData=(text)=>{
@@ -146,11 +166,11 @@ class App extends Component {
                     /> 
                 </View>
 
-                <AutoExpandingInput onChangeText={(querytext)=>this._onChangeText(querytext)}
+                <AutoExpandingInput onChangeText={this._onChangeText}
                     // onEndEditing={(event)=>this.getLocalData(event.nativeEvent.text)}
                 />
                 
-                {this.state.showTemp ? <NetDataCom /> : <LocalDataCom localData={this.state.localres} />}
+                {this.state.showTemp ? <NetDataCom /> : <LocalDataCom localData={this.state.localres} onPressData = {this.getPressData} />}
 
             </View>
         );

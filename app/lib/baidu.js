@@ -1,8 +1,6 @@
-const develop_config = require('../cfg/develop_config');
-if (develop_config['node-fetch'])
-    var fetch = require('node-fetch');
-
-const { isalpha } = require('./yukimilib');
+const {
+    isalpha
+} = require('./yukimilib');
 
 // map standard language tags into baidu language tags
 const map = {

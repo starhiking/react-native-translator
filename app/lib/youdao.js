@@ -1,7 +1,3 @@
-const develop_config = require('../cfg/develop_config');
-if (develop_config['node-fetch'])
-    var fetch = require('node-fetch');
-
 const md5 = require('md5');
 
 const appKey = '2d8e89a6fd072117';
