@@ -1,7 +1,7 @@
 /**
  * Author: Lan Xing
- * Description:
- *
+ * Description:This component show the data search in local Dictionary
+ * props:localData (array)
  */
 
 import React, { Component } from 'react';
@@ -27,7 +27,7 @@ export default class LocalDataCom extends Component {
     }
 
     _renderItem = ({ item, index }) => (
-        <TouchableHighlight onPress={() => this.getPressData(item, index)} >
+        <TouchableHighlight underlayColor='white' onPress={() => this.getPressData(item, index)} >
             <Text style={{ fontSize: 22 }} >{item.join()}</Text>
         </TouchableHighlight>
     )

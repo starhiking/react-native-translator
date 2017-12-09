@@ -1,7 +1,14 @@
 /**
  * Author: Lan Xing
- * Description:
- *
+ * Description: This component connects the API and show API data
+ * API is a object which deposit data from api
+ *      props:API(baidu,google,youdao)
+ *      API:from
+ *          to
+ *          src
+ *          dst
+ *          parts
+ *          sentences
  */
 
 import React, { Component } from 'react';
@@ -14,7 +21,7 @@ export default class APINetDataCom extends Component {
     }
 
     renderExpenseItem(item, i) {
-        return <View key={i}><Text key={i}>{item}</Text></View>;
+        return <View key={i}><Text style ={{fontSize:18}} key={i}>{item}</Text></View>;
     }
 
     render() {
@@ -22,10 +29,10 @@ export default class APINetDataCom extends Component {
         if (API == null) return <View />;
         else return (
             <View>
-                <Text style={{ fontSize: 22, color: '#B45B3E' }}>{API.engine}:</Text>
+                <Text style={{ fontSize: 22, color: '#6699CC' }}>{API.engine}:</Text>
                 <View>
-                    <Text>{language.from[API.from]}-->{language.to[API.to]}</Text>
-                    <Text>{API.src}:{API.dst}</Text>
+                    <Text >{language.from[API.from]}-->{language.to[API.to]}</Text>
+                    <Text style ={{fontSize:18}} >{API.src}:{API.dst}</Text>
                     <View>
                         {
                             API.parts.map((mean, i) => this.renderExpenseItem(mean, i))

@@ -1,7 +1,7 @@
 /**
  * Author: Lan Xing
- * Description:
- *
+ * Description:This component height will auto grow
+ *      props : queryText(defaultValue in textInput)
  */
 
 import React, { Component } from 'react';

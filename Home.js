@@ -1,6 +1,10 @@
 /**
  * Author: Lan Xing
- * Description:
+ * Description:This is the search page component
+ *              It offer users choose the APIs and Languages
+ *              And users can input words or sentences 
+ *              press search icon or local words 
+ *              it will show the data from serval APIs
  *
  */
 
@@ -152,7 +156,7 @@ export default class Home extends Component {
                             style={{ flex: 1 }}
                         />
                         {this.state.querytext == "" ? <Text /> :
-                            <TouchableHighlight underlayColor='#99d9f4' onPress={this._findText}>
+                            <TouchableHighlight underlayColor='white' onPress={this._findText}>
                                 <Image
                                     source={require('./app/res/search.png')}
                                     style={{ width: 50, height: 50, marginRight: 10 }}
