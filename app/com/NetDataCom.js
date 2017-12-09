@@ -2,6 +2,7 @@
  * Author: Lan Xing
  * Description: This Component show all the data from NetWork
  *  contains:google baidu youdao (if exist) commonData (such as sentences,pronunciation,similar word)
+ *  Feature: stateless component
  *  props:baiduData(object,data from baidu API)
  *        googleData(object,data from google API)
  *        youdaoData(object,data from youdao API)

@@ -1,6 +1,7 @@
 /**
  * Author: Lan Xing
  * Description: This component connects the API and show API data
+ * Feature: stateless component
  * API is a object which deposit data from api
  *      props:API(baidu,google,youdao)
  *      API:from
@@ -31,7 +32,7 @@ export default class APINetDataCom extends Component {
             <View>
                 <Text style={{ fontSize: 22, color: '#6699CC' }}>{API.engine}:</Text>
                 <View>
-                    <Text >{language.from[API.from]}-->{language.to[API.to]}</Text>
+                    <Text >{language.from[API.from]?language.from[API.from]:"其他"}-->{language.to[API.to]}</Text>
                     <Text style ={{fontSize:18}} >{API.src}:{API.dst}</Text>
                     <View>
                         {

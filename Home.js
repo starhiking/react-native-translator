@@ -72,6 +72,10 @@ export default class Home extends Component {
 
         this.setState({
             querytext: newData,
+            baiduData:null,
+            youdaoData:null,
+            googleData:null,
+            commonData:null,
         });
 
         common(newData, this.state.from, this.state.to).then(result => {
