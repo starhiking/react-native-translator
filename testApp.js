@@ -22,7 +22,6 @@ class AutoExpandingInput extends Component{
         this.setState({ height: event.nativeEvent.contentSize.height });
     }
 
-
     render() {
         return (
             <TextInput {...this.props}
@@ -32,7 +31,6 @@ class AutoExpandingInput extends Component{
                 defaultValue={this.props.queryValue}
                 underlineColorAndroid='transparent'
                 placeholder="输入文字即可翻译"
-                
             />
         );
     }
@@ -96,9 +94,8 @@ class NetDataCom extends Component{
                 {commonData==null||commonData.synonyms.length == 0?<Text />:<Text style={{fontSize:22,color:"#B45B3E"}}>近义词(synonyms): </Text>}
                 {commonData==null||commonData.synonyms.length == 0?<Text />:<Text>{commonData.synonyms.join('     ')}</Text>}
                 {commonData==null||commonData.sentences.length == 0?<Text />:<Text style={{fontSize:22,color:"#B45B3E"}}>例句(sentences): </Text>}
-                {commonData==null?<Text />:commonData.sentences.splice(0,5).map((sentence,i)=>this.renderSentenceItem(sentence,i))}
+                {commonData==null||commonData.sentences.length == 0?<Text />:commonData.sentences.splice(0,5).map((sentence,i)=>this.renderSentenceItem(sentence,i))}
             </View>
-
         )
     }
 
@@ -119,6 +116,7 @@ class LocalDataCom extends Component{
         this.setState({
             chooseData:item[0],
         });
+
         this.props.onPressData(item[0]);
     }
 
@@ -155,11 +153,16 @@ class App extends Component {
             youdaoData:null,
             commonData:null,
             dailyData:null,
+            from:'auto',
+            to:'zh',
+            usebaidu:true,
+            usegoogle:true,
+            useyoudao:true,
         }; 
     }
 
     componentDidMount() {
-        getDailySentence(3)
+        getDailySentence(4)
         .then(result => {
             const text = JSON.stringify(result, null, 4);
             this.setState({ 
@@ -170,44 +173,45 @@ class App extends Component {
 
     getPressData = (newData)=>{
 
+        if(this.state.from == this.state.to){
+            alert('The two languages are the same');
+            return;
+        }
+            
         this.setState({
             querytext:newData,
         });
 
-        common(newData,'en','zh').then(result => {
+        common(newData,this.state.from, this.state.to).then(result => {
             this.setState({
                 commonData:result,
                 showTemp:true,
             })
         });
-        baidu(newData, 'en', 'zh').then(result => {
-            this.setState({
-                baiduData:result,
-                showTemp:true
-            })
-        });
-        youdao(newData, 'en', 'zh').then(result => {
-            this.setState({
-                youdaoData:result,
-                showTemp:true,
+
+        if(this.state.usebaidu)
+            baidu(newData, this.state.from, this.state.to).then(result => {
+                this.setState({
+                    baiduData:result,
+                    showTemp:true
+                })
             });
-        });
-        google(newData, 'en', 'zh').then(result => {
-            this.setState({
-                googleData:result,
-                showTemp:true,
-            })
-        });
         
+        if(this.state.useyoudao)
+            youdao(newData, this.state.from, this.state.to).then(result => {
+                this.setState({
+                    youdaoData:result,
+                    showTemp:true,
+                });
+            });
 
-    }
-
-    getLocalData=(text)=>{
-
-    }
-
-    getNetData=(text)=>{
-
+        if(this.state.usegoogle)
+            google(newData, this.state.from, this.state.to).then(result => {
+                this.setState({
+                    googleData:result,
+                    showTemp:true,
+                })
+            });
     }
 
     _onChangeText=(text)=>{
@@ -233,7 +237,7 @@ class App extends Component {
     }
     _dateHeader=()=>{
         var localDate = new Date();
-        var time = localDate.getFullYear()+"-"+(localDate.getMonth()+1)+"-"+(localDate.getDate()+1);
+        var time = localDate.getFullYear()+"-"+(localDate.getMonth()+1)+"-"+(localDate.getDate());
         return (
             <Text style={{fontSize:22,color:"#B45B3E"}}>每日一句:{time}</Text>
         )
@@ -241,18 +245,24 @@ class App extends Component {
 
     _keyExtractor = (item,index) => index;
 
+    _findText = ()=>{
+        var tempData = this.state.querytext;
+        this.getPressData(tempData);
+    }
+
     render() {
         return (
-            <ScrollView >
+            <View >
                 <View style={{flexDirection:'row'}}>
                     <ModalDropdown style={styles.dropdown}
                         textStyle={styles.dropdown_text}
                         dropdownStyle={styles.dropdown_dropdown}
                         options={language.from}
                         defaultValue={'源语言'}
+                        defaultIndex = {1}
+                        onSelect={(idx, value) => this.setState({from:idx})}
                     />
-
-                    <TouchableHighlight style={styles.btn} onPress={this.getLocalData}>
+                    <TouchableHighlight style={styles.btn}>
                         <Text>
                             翻译接口
                         </Text>
@@ -263,40 +273,55 @@ class App extends Component {
                         dropdownStyle={styles.dropdown_dropdown}
                         options={language.to}
                         defaultValue={'目标语言'}
+                        defaultIndex = {1}
+                        onSelect={(idx, value) => this.setState({to:idx})}
                     />
                 </View>
-
+                <View  style={styles.container}>
+                
                 <AutoExpandingInput onChangeText={this._onChangeText}
                     queryValue = {this.state.querytext}
+                    style={{flex:1}}
                     // onEndEditing={(event)=>this.getLocalData(event.nativeEvent.text)}
                 />
-                
-                {this.state.showTemp ? 
-                    <NetDataCom 
-                        baiduData={this.state.baiduData}
-                        googleData={this.state.googleData}
-                        youdaoData={this.state.youdaoData}
-                        commonData = {this.state.commonData}
-                    /> : <LocalDataCom 
-                            localData={this.state.localres} 
-                            onPressData = {this.getPressData} 
-                        />}
+                {this.state.querytext==""?<Text />:<TouchableHighlight  onPress={this._findText}><Image source={{uri:"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3141758320,2770624601&fm=27&gp=0.jpg"}} style={{width:50,height:50}} /></TouchableHighlight>} 
+                </View>
+                <ScrollView>
 
-                <FlatList 
-                    keyExtractor ={this._keyExtractor}
-                    data={this.state.dailyData}
-                    renderItem={this._dailyItem}
-                    ListHeaderComponent={this._dateHeader}
-                />
+                    {this.state.showTemp ? 
+                        <NetDataCom 
+                            baiduData={this.state.baiduData}
+                            googleData={this.state.googleData}
+                            youdaoData={this.state.youdaoData}
+                            commonData = {this.state.commonData}
+                        /> : <LocalDataCom 
+                                localData={this.state.localres} 
+                                onPressData = {this.getPressData} 
+                            />}
 
-            </ScrollView>
+                    <FlatList 
+                        
+                        keyExtractor ={this._keyExtractor}
+                        data={this.state.dailyData}
+                        renderItem={this._dailyItem}
+                        ListHeaderComponent={this._dateHeader}
+                    />
+
+                </ScrollView>
+
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    container: {    
+        flexDirection: 'row',
+        backgroundColor: '#ccc',    
+        alignItems: 'center' 
+    }, 
     edit: {
-        marginTop: 15,
+        flex:1,
         fontSize: 25,
         backgroundColor: '#ccc',
     },

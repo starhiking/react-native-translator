@@ -14,7 +14,7 @@ if (node_fetch) {
 const { printf } = require('./yukimilib');
 
 const crawlDailySentence = (date) => {
-    date = `${date.getFullYear()}-${printf('%02d', date.getMonth() + 1)}-${printf('%02d', date.getDate()+1)}`;
+    date = `${date.getFullYear()}-${printf('%02d', date.getMonth() + 1)}-${printf('%02d', date.getDate())}`;
     const url = `http://sentence.iciba.com/index.php?c=dailysentence&m=getdetail&title=${date}`;
     return fetch(encodeURI(url))
         .then(res => res.text())

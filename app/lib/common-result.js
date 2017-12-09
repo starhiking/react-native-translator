@@ -11,6 +11,7 @@ const baidu = require('./baidu');
 const google = require('./google');
 
 module.exports = (text, from, to) => {
+    text = text.toLowerCase();
     return Promise.all([
         baidu(text, from, to),
         google(text, from, to)
