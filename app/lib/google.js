@@ -70,6 +70,15 @@ const google = (text, from, to) => {
                 synonyms = [];
             }
 
+            let src_pron = '', dst_pron = '';
+            try {
+                src_pron = json[0][1][3];
+                dst_pron = json[0][1][2];
+            } catch (e) {
+                src_pron = '';
+                dst_pron = '';
+            }
+
             return {
                 engine: '谷歌(Google)',
                 from: map_inverse[json[2]],
@@ -78,8 +87,8 @@ const google = (text, from, to) => {
                 dst: json[0][0][0],
                 parts: parts,
                 sentences: sentences,
-                src_pron: json[0][1][3],
-                dst_pron: json[0][1][2],
+                src_pron: src_pron,
+                dst_pron: dst_pron,
                 synonyms: synonyms
             };
         });

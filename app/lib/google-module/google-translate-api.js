@@ -1,5 +1,6 @@
 /**
- * Author: Yan Nan
+ * Author: matheuss (https://www.npmjs.com/package/google-translate-api)
+ * Modified by: Yan Nan
  * Description:
  *     Most codes of this folder are from npm module 'google-translate-api'.
  *     That module itself is based on node.js and other npm modules, which can not run on React Native.

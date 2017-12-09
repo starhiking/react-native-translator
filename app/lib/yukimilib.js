@@ -1,3 +1,9 @@
+/**
+ * Author: Yan Nan
+ * Description:
+ *     Some common functions and debug functions.
+ */
+
 const dir = o => {
     let s = '';
     for (let k in o) {

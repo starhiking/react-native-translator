@@ -5,7 +5,6 @@
  * Everything between 'BEGIN' and 'END' was copied from the url above.
  */
 
-
 const { node_fetch } = require('../../cfg/develop_config');
 if (node_fetch) {
     eval('var fetch = require(\'node-fetch\')');
