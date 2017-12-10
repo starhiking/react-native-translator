@@ -5,6 +5,8 @@
  *     - example sentences: most from Baidu translation,
  *           And the most supported (by Baidu & Google) language is English. Others supported few.
  *     - pronunciation & synonyms: only Google provide them.
+ * Usage:
+ *     Similar to google, see google.js.
  */
 
 const baidu = require('./baidu');

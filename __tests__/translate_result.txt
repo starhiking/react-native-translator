@@ -1,0 +1,102 @@
+
+**************************************************
+google: French SENTENCE "Je t'aime" from auto to ja
+**************************************************
+{
+    "engine": "谷歌(Google)",
+    "from": "fr",
+    "to": "ja",
+    "src": "Je t'aime",
+    "dst": "私はあなたを愛している",
+    "parts": [],
+    "sentences": [],
+    "dst_pron": "Watashi wa anata o aishite iru",
+    "synonyms": []
+}
+**************************************************
+google: French SENTENCE "Je t'aime" from auto to fr
+**************************************************
+{
+    "engine": "谷歌(Google)",
+    "from": "fr",
+    "to": "fr",
+    "src": "Je t'aime",
+    "dst": "Je t'aime",
+    "parts": [],
+    "sentences": [],
+    "src_pron": "",
+    "dst_pron": "",
+    "synonyms": []
+}
+**************************************************
+google: French SENTENCE "Je t'aime" from fr to ja
+**************************************************
+{
+    "engine": "谷歌(Google)",
+    "from": "fr",
+    "to": "ja",
+    "src": "Je t'aime",
+    "dst": "私はあなたを愛している",
+    "parts": [],
+    "sentences": [],
+    "dst_pron": "Watashi wa anata o aishite iru",
+    "synonyms": []
+}
+**************************************************
+google: French SENTENCE "Je t'aime" from auto to zh
+**************************************************
+{
+    "engine": "谷歌(Google)",
+    "from": "fr",
+    "to": "zh",
+    "src": "Je t'aime",
+    "dst": "我爱你",
+    "parts": [],
+    "sentences": [],
+    "dst_pron": "Wǒ ài nǐ",
+    "synonyms": []
+}
+**************************************************
+google: French SENTENCE "Je t'aime" from fr to zh
+**************************************************
+{
+    "engine": "谷歌(Google)",
+    "from": "fr",
+    "to": "zh",
+    "src": "Je t'aime",
+    "dst": "我爱你",
+    "parts": [],
+    "sentences": [],
+    "dst_pron": "Wǒ ài nǐ",
+    "synonyms": []
+}
+**************************************************
+google: French SENTENCE "Je t'aime" from fr to en
+**************************************************
+{
+    "engine": "谷歌(Google)",
+    "from": "fr",
+    "to": "en",
+    "src": "Je t'aime",
+    "dst": "I love you",
+    "parts": [],
+    "sentences": [],
+    "src_pron": "",
+    "dst_pron": "",
+    "synonyms": []
+}
+**************************************************
+google: French SENTENCE "Je t'aime" from auto to en
+**************************************************
+{
+    "engine": "谷歌(Google)",
+    "from": "fr",
+    "to": "en",
+    "src": "Je t'aime",
+    "dst": "I love you",
+    "parts": [],
+    "sentences": [],
+    "src_pron": "",
+    "dst_pron": "",
+    "synonyms": []
+}

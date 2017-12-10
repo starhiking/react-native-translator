@@ -4,6 +4,8 @@
  *     Baidu translation: http://fanyi.baidu.com/
  *     API: http://fanyi.baidu.com/v2transapi
  *     It's analysed by myself(including the API address, the return JSON format, .etc), with Chrome F12 comtrol panel.
+ * Usage:
+ *     Similar to google, see google.js.
  */
 
 const { node_fetch } = require('../cfg/develop_config');

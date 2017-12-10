@@ -6,6 +6,40 @@
  *     Google translation requires a encrypted token, which is hard to analyse.
  *     The request is made by the 'google-module'(see google-translate-api.js for more comment)
  *     But the return JSON is parsed by myself, since Google doesn't provide a free API.
+
+Usage:
+    google([string]source text, [string]source language(standard tag), [string]destination language(standard tag))
+        .then(result => {});
+
+    [object]result: {
+        engine: '谷歌(Google)',
+        from: [string]source language(standard tag),
+        to: [string]destination language(standard tag),
+        src: [string]source text,
+        dst: [string]destination text,
+        dict: [
+            0: [string]part of speech and meaning,
+            1: [string]part of speech and meaning,
+            ...
+        ],
+        sentence: [
+            0: [
+                0: [string]example sentence source part,
+                1: [string]example sentence destination part
+            ],
+            1: [
+                0: [string]example sentence source part,
+                1: [string]example sentence destination part
+            ],
+            ...
+        ]
+        src_pron: [string]source pronunciation,
+        dst_pron: [string]destination pronunciation,
+        synonyms: [
+            0: [string]a synonyms,
+            1: [string]a synonyms,
+            ...
+        ]
  */
 
 const translate = require('./google-module/google-translate-api');

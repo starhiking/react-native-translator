@@ -37,7 +37,7 @@ const getDailySentence = (count) => {
 
     let promises = [],
         date = new Date();
-    
+
 
     for (; count > 0; --count) {
         promises.push(crawlDailySentence(date));

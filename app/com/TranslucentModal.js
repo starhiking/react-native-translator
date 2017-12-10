@@ -12,6 +12,8 @@
 import React, { Component } from 'react';
 import { View, Modal, StyleSheet } from 'react-native';
 
+// Feature: stateless component
+// Feature: screen navigation
 const TranslucentModal = (props) => (
     <Modal
         visible={props.visible}

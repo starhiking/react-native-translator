@@ -4,6 +4,8 @@
  *     Youdao translation: http://fanyi.youdao.com/
  *     API: http://openapi.youdao.com/api
  *     I applied for an API account at Youdao's official website, study the usage through its documentation.
+ * Usage:
+ *     Similar to google, see google.js.
  */
 
 const { node_fetch } = require('../cfg/develop_config');

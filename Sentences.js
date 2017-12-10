@@ -11,6 +11,7 @@ import { Card } from 'react-native-elements';
 
 import getDailySentence from './app/lib/daily-sentence';
 
+// Feature: stateless component
 const Sentence = ({ item, index }) => (
     <Card title={item.date} image={{ uri: item.image }} >
         <Text style={styles.english}> {'    ' + item.sentence} </Text>

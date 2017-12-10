@@ -409,21 +409,21 @@ const separator = (engine, lang, type, query, from, to) =>
 // }
 
 // google: French SENTENCE from ['auto', 'fr'] to ALL
-// for (let from of ['auto', 'fr']) {
-//     for (let to in to_s) {
-//         if (from === to) {
-//             continue;
-//         }
-//         promises.push(google('Je t\'aime', from, to)
-//             .then(result => {
-//                 if (result.sentences.length > 0)
-//                     result.sentences = `[Array length = ${result.sentences.length}]`;
-//                 output += separator('google', 'French', 'SENTENCE', 'Je t\'aime', from, to);
-//                 output += JSON.stringify(result, null, 4);
-//             })
-//             .catch(reason => console.log(reason)));
-//     }
-// }
+for (let from of ['auto', 'fr']) {
+    for (let to in to_s) {
+        if (from === to) {
+            continue;
+        }
+        promises.push(google('Je t\'aime', from, to)
+            .then(result => {
+                if (result.sentences.length > 0)
+                    result.sentences = `[Array length = ${result.sentences.length}]`;
+                output += separator('google', 'French', 'SENTENCE', 'Je t\'aime', from, to);
+                output += JSON.stringify(result, null, 4);
+            })
+            .catch(reason => console.log(reason)));
+    }
+}
 
 // youdao: French SENTENCE from ['auto', 'fr'] to ALL
 // for (let from of ['auto', 'fr']) {
